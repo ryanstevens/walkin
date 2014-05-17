@@ -3,6 +3,7 @@
 logs
 *.log
 
+build
 
 # Runtime data
 pids
