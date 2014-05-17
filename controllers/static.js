@@ -8,6 +8,5 @@ module.exports = function (req, res, template, viewData) {
 
   template = template || app.locals.templateMap[route];
   viewData = viewData || { title: capitalize(route) };
-
   res.render(template, viewData);
 };

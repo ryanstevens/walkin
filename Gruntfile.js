@@ -87,7 +87,7 @@ var _ = require('underscore')._,
     DEV_CONFIG = {
       COPY: DEFAULT_CONFIG.COPY,
       REPLACE: DEFAULT_CONFIG.REPLACE,
-      JSHINT: DEFAULT_CONFIG.JSHINT,
+   //   JSHINT: DEFAULT_CONFIG.JSHINT,
       CONCAT_IN_ORDER: DEFAULT_CONFIG.CONCAT_IN_ORDER,
       LESS: DEFAULT_CONFIG.LESS
     },
@@ -95,7 +95,7 @@ var _ = require('underscore')._,
     PROD_CONFIG = {
       COPY: DEFAULT_CONFIG.COPY,
       REPLACE: DEFAULT_CONFIG.REPLACE,
-      JSHINT: DEFAULT_CONFIG.JSHINT,
+    //  JSHINT: DEFAULT_CONFIG.JSHINT,
       CONCAT_IN_ORDER: DEFAULT_CONFIG.CONCAT_IN_ORDER,
       LESS: (function () {
             var config = _.clone(DEFAULT_CONFIG.LESS);
@@ -106,8 +106,8 @@ var _ = require('underscore')._,
     },
 
     DEFAULT_TASKS = {
-      dev: ['copy', 'replace', 'jshint', 'concat_in_order', 'less'],
-      prod: ['copy', 'replace', 'jshint', 'concat_in_order', 'uglify', 'less']
+      dev: ['copy', 'replace', 'concat_in_order', 'less'],
+      prod: ['copy', 'replace', 'concat_in_order', 'uglify', 'less']
     };
 
 function getTaskList (env, tasks) {

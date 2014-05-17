@@ -7,6 +7,7 @@ var consolidate = require('consolidate'),
 
 app.locals({
   templateMap: {
+    "home" : "desktop/product.html"
   }
 });
 
@@ -28,4 +29,4 @@ app.get('/:route?', function (req, res) {
 app.listen(3000);
 
 console.log('Running buildstrap demo server on port 3000.');
-*/
+
