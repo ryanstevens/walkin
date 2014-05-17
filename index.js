@@ -3,7 +3,8 @@ var consolidate = require('consolidate'),
     express = require('express'),
     swig = require('swig'),
     api = require('./lib/api'),
-    app = express();
+    app = express(),
+    port = Number(process.env.PORT || 3000);
 
 app.locals({
   templateMap: {
@@ -32,7 +33,7 @@ app.get('/ajax', function (req, res) {
 });
 
 
-app.listen(3000);
+app.listen(port);
 
-console.log('Running buildstrap demo server on port 3000.');
+console.log('Running buildstrap demo server on port ' + port);
 
