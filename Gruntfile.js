@@ -137,7 +137,7 @@ module.exports = function (grunt) {
       defaultTasks = getTaskList(env, DEFAULT_TASKS[env]);
 
   if (env !== 'prod') {
-    defaultTasks.concat('watch');
+    defaultTasks = defaultTasks.concat('watch');
   }
 
   grunt.initConfig({
