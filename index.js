@@ -22,9 +22,15 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/build/html');
 swig.setDefaults({ cache: false });
 
+
 app.get('/:route?', function (req, res) {
   require('./controllers/static').call(app, req, res);
 });
+
+app.get('/ajax', function (req, res) {
+  require('./controllers/ajax').call(app, req, res);
+});
+
 
 app.listen(3000);
 
