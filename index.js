@@ -7,7 +7,7 @@ var consolidate = require('consolidate'),
 
 app.locals({
   templateMap: {
-    "home" : "desktop/product.html"
+    'home': 'desktop/home.html'
   }
 });
 
