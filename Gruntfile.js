@@ -94,7 +94,25 @@ var _ = require('underscore')._,
 
     PROD_CONFIG = {
       COPY: DEFAULT_CONFIG.COPY,
-      REPLACE: DEFAULT_CONFIG.REPLACE,
+      REPLACE: {
+        options: {
+          patterns: [{
+            match: /\{% extends '/g,
+            replacement: function (match) {
+              return match + '/app/build/html';
+            }
+          },{
+            match: /\{% include '/g,
+            replacement: function (match) {
+              return match + '/app/build/html';
+            }
+          }]
+        },
+        expand: true,
+        cwd: 'build/html/',
+        src: ['**/*.html'],
+        dest: 'build/html/'
+      },
     //  JSHINT: DEFAULT_CONFIG.JSHINT,
       CONCAT_IN_ORDER: DEFAULT_CONFIG.CONCAT_IN_ORDER,
       LESS: (function () {
