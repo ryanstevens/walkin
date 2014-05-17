@@ -116,7 +116,11 @@ function getTaskList (env, tasks) {
 
 module.exports = function (grunt) {
   var env = grunt.option('env') || 'dev',
-      defaultTasks = getTaskList(env, DEFAULT_TASKS[env]).concat('watch');
+      defaultTasks = getTaskList(env, DEFAULT_TASKS[env]);
+
+  if (env !== 'prod') {
+    defaultTasks.concat('watch');
+  }
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),

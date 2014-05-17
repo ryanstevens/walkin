@@ -20,12 +20,14 @@
     "grunt-contrib-uglify": "~0.2.4",
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-replace": "~0.5.1",
-    "grunt-contrib-copy": "~0.4.1"
+    "grunt-contrib-copy": "~0.4.1",
+    "grunt-cli" : "*"
   },
   "engine": "node 0.10.26",
   "scripts": {
     "test": "node node_modules/tap/bin/tap --stderr test --tap",
-    "start" : "node index.js"
+    "start" : "node index.js",
+    "postinstall": "./node_modules/grunt-cli/bin/grunt --env=prod"
   },
   "repository": {
     "type": "git",
