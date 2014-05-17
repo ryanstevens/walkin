@@ -32,8 +32,6 @@ app.get('/:route?', function (req, res) {
   require('./controllers/static').call(app, req, res);
 });
 
-
 app.listen(port);
 
-console.log('Running buildstrap demo server on port ' + port);
-
+console.log('Running walkup server on port ' + port);
