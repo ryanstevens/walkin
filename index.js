@@ -1,9 +1,8 @@
 // buildstrap demo server.
-
 var consolidate = require('consolidate'),
     express = require('express'),
     swig = require('swig'),
-
+    api = require('./lib/api'),
     app = express();
 
 app.locals({
@@ -29,3 +28,4 @@ app.get('/:route?', function (req, res) {
 app.listen(3000);
 
 console.log('Running buildstrap demo server on port 3000.');
+*/
