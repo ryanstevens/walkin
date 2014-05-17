@@ -22,6 +22,7 @@
     "grunt-replace": "~0.5.1",
     "grunt-contrib-copy": "~0.4.1"
   },
+  "engine": "node 0.10.26",
   "scripts": {
     "test": "node node_modules/tap/bin/tap --stderr test --tap",
     "start" : "node index.js"
