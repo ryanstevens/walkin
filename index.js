@@ -9,7 +9,9 @@ var consolidate = require('consolidate'),
 app.locals({
   templateMap: {
     'home': 'desktop/home.html',
-    'signup': 'desktop/signup.html'
+    'signup': 'desktop/signup.html',
+    'walkup': 'desktop/walkup.html',
+    'rooms': 'desktop/rooms.html'
   }
 });
 
