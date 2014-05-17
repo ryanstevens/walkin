@@ -1,0 +1,12 @@
+{% extends '/base.html' %}
+
+{% block body %}
+  <div class="container">
+    <p><a class="btn btn-primary login">Log in with Facebook.</a></p>
+  </div>
+{% endblock %}
+
+{% block js_body_page %}
+  <script src="//connect.facebook.net/en_US/all.js"></script>
+  <script src="/js/desktop/login.js"></script>
+{% endblock %}

@@ -24,7 +24,9 @@
 <body>
 {% block body %}{% endblock %}
 
-{% block js_body_base %}{% endblock %}
+{% block js_body_base %}
+  <script src="/js/desktop/base.js"></script>
+{% endblock %}
 {% block js_body_theme %}{% endblock %}
 {% block js_body_group %}{% endblock %}
 {% block js_body_page %}{% endblock %}

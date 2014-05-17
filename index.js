@@ -8,7 +8,8 @@ var consolidate = require('consolidate'),
 
 app.locals({
   templateMap: {
-    'home': 'desktop/home.html'
+    'home': 'desktop/home.html',
+    'signup': 'desktop/signup.html'
   }
 });
 
