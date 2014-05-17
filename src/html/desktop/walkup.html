@@ -2,6 +2,18 @@
 
 {% block body %}
   <div class="container">
-    <p>Your walkup song page.</p>
+    <fieldset>
+      <label>Artist - Song Name</label>
+      <input type="text" placeholder="Rick Astley - Never Gonna Give You Up">
+
+      <label>Room</label>
+      <select>
+        <option>Some Room</option>
+        <option>Some Other Room</option>
+      </select>
+
+      <label>Walk Up!</label>
+      <button class="btn btn-primary walkup">Walk Up</button>
+    </fieldset>
   </div>
 {% endblock %}
