@@ -1,0 +1,35 @@
+{
+  "name": "walkin",
+  "version": "0.0.0",
+  "description": "walkin ======",
+  "main": "index.js",
+  "dependencies": {
+    "consolidate": "0.9.1",
+    "express": "3.4.0",
+    "swig": "1.0.0-rc3",
+    "underscore": "1.5.2"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-less": "~0.7.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-concat-in-order": "~0.1.6",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-replace": "~0.5.1",
+    "grunt-contrib-copy": "~0.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ryanstevens/walkin.git"
+  },
+  "author": "Ryan Stevens, Josh Everett, Alex Dorrin, Pierre Reimertz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ryanstevens/walkin/issues"
+  },
+  "homepage": "https://github.com/ryanstevens/walkin"
+}
