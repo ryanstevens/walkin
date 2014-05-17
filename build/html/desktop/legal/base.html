@@ -1,0 +1,21 @@
+{% extends '/Users/ryanstevens/Documents/workspaces/node_modules/walkin/build/html/base.html' %}
+
+{% block css_head_theme %}
+  <link rel="stylesheet" href="/css/desktop/legal/base.css">
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <nav class="navbar">
+      <div class="navbar-inner">
+        <ul class="nav">
+          <li><a href="/">Project</a></li>
+          <li><a href="/terms">Terms of Service</a></li>
+          <li><a href="/privacy">Privacy</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+
+  {% block content %}{% endblock %}
+{% endblock %}
