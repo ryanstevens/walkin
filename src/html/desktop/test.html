@@ -1,0 +1,14 @@
+{% extends '/base.html' %}
+
+{% block js_head_page %}
+  <script>
+    walkup.video = '{{ video }}';
+  </script>
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <h1>YouTube Test</h1>
+    <p>{{ video }}</p>
+  </div>
+{% endblock %}

@@ -22,15 +22,6 @@ var _ = require('underscore')._,
         src: ['**/*.html'],
         dest: 'build/html/'
       },
-      JSHINT: {
-        options: {
-          jshintrc: './.jshintrc'
-        },
-        expand: true,
-        cwd: 'src/js/',
-        // Lint everything but third party code.
-        src: ['**/*.js', '!third-party/**/*.js']
-      },
       CONCAT_IN_ORDER: {
         options: {
           extractRequired: function (filepath, filecontent) {
@@ -87,7 +78,6 @@ var _ = require('underscore')._,
     DEV_CONFIG = {
       COPY: DEFAULT_CONFIG.COPY,
       REPLACE: DEFAULT_CONFIG.REPLACE,
-   //   JSHINT: DEFAULT_CONFIG.JSHINT,
       CONCAT_IN_ORDER: DEFAULT_CONFIG.CONCAT_IN_ORDER,
       LESS: DEFAULT_CONFIG.LESS
     },
@@ -113,7 +103,6 @@ var _ = require('underscore')._,
         src: ['**/*.html'],
         dest: 'build/html/'
       },
-    //  JSHINT: DEFAULT_CONFIG.JSHINT,
       CONCAT_IN_ORDER: DEFAULT_CONFIG.CONCAT_IN_ORDER,
       LESS: (function () {
             var config = _.clone(DEFAULT_CONFIG.LESS);
@@ -153,11 +142,6 @@ module.exports = function (grunt) {
       prod: PROD_CONFIG.REPLACE
     },
 
-    jshint: {
-      dev: DEV_CONFIG.JSHINT,
-      prod: PROD_CONFIG.JSHINT
-    },
-
     concat_in_order: {
       dev: DEV_CONFIG.CONCAT_IN_ORDER,
       prod: PROD_CONFIG.CONCAT_IN_ORDER
@@ -189,9 +173,9 @@ module.exports = function (grunt) {
         tasks: getTaskList(env, (function () {
               switch (env) {
                 case 'dev':
-                  return ['jshint', 'concat_in_order'];
+                  return ['concat_in_order'];
                 case 'prod':
-                  return ['jshint', 'concat_in_order', 'uglify'];
+                  return ['concat_in_order', 'uglify'];
               }
             })())
       }
@@ -200,7 +184,6 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-replace');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-concat-in-order');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');

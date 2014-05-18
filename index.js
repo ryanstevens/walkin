@@ -31,6 +31,10 @@ app.get('/ajax', function (req, res) {
   require('./controllers/ajax').call(app, req, res);
 });
 
+app.get('/test/:video', function (req, res) {
+  require('./controllers/test').call(app, req, res);
+});
+
 app.get('/:route?', function (req, res) {
   require('./controllers/static').call(app, req, res);
 });
