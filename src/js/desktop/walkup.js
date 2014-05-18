@@ -40,7 +40,11 @@ $(function () {
     walkup.connected.done(function() {
       socket.emit('enterRoom', {
         roomId : $('#room option:selected').val(),
-        song : walkup.song
+        song : walkup.song, 
+        user : {
+          name : walkup.user.first_name + ' ' + walkup.user.last_name,
+          fb_user_id : walkup.user.fb_user_id
+        }
       });
     });
   });
