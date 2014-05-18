@@ -1,6 +1,7 @@
 // buildstrap demo server.
 var consolidate = require('consolidate'),
     express = require('express'),
+    cookieParser = require('cookie-parser'),
     swig = require('swig'),
     api = require('./lib/api'),
     app = express(),
@@ -16,6 +17,7 @@ app.locals({
   }
 });
 
+app.use(cookieParser());
 app.use('/css', express.static(__dirname + '/build/css'));
 app.use('/js', express.static(__dirname + '/build/js'));
 app.use('/img', express.static(__dirname + '/src/img'));

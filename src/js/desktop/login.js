@@ -1,3 +1,7 @@
+$.ajax({url : '/ajax/me'}).done(function(user) {
+  console.log(user);
+});
+
 $(function (argument) {
 
   function tryLogin (response) {

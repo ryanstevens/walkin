@@ -18,6 +18,7 @@ var actions = {
   },
   me : function(req, res, dfd) {
     if (!req.cookies.wid) return dfd.resolve({ error : 'goaway'});
+    console.log("Checking for session::" + req.cookies.wid)
     return User.getUserFromSession(req.cookies.wid);
   }
 };
