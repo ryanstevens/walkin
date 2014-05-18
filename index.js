@@ -32,7 +32,7 @@ function ensureAuthenticated(req, res, next) {
 passport.use(new BeatsMusicStrategy({
   clientID: beatsClientId,
   clientSecret: beatsSecret,
-  callbackURL: 'http://' + host + (port > 80 ? ':' + port : '') + '/auth/beatsmusic/callback'
+  callbackURL: 'http://' + host + ((host.indexOf('local')>0) ? (port > 80 ? ':' + port : '') : '') + '/auth/beatsmusic/callback'
 }, function(accessToken, refreshToken, profile, done) {
   done(null, {
     accessToken: accessToken,
