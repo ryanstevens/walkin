@@ -48,13 +48,6 @@ var _ = require('underscore')._,
         dest: 'build/js/',
         ext: '.js'
       },
-      UGLIFY: {
-        expand: true,
-        cwd: 'build/js/',
-        src: ['**/*.js'],
-        dest: 'build/js/',
-        ext: '.js'
-      },
       LESS: {
         options: {
           paths: ['src/css'],
@@ -108,13 +101,12 @@ var _ = require('underscore')._,
             var config = _.clone(DEFAULT_CONFIG.LESS);
             config.options = _.defaults({ yuicompress: true }, config.options);
             return config;
-          })(),
-      UGLIFY: DEFAULT_CONFIG.UGLIFY
+          })()
     },
 
     DEFAULT_TASKS = {
       dev: ['copy', 'replace', 'concat_in_order', 'less'],
-      prod: ['copy', 'replace', 'concat_in_order', 'uglify', 'less']
+      prod: ['copy', 'replace', 'concat_in_order', 'less']
     };
 
 function getTaskList (env, tasks) {
@@ -147,9 +139,6 @@ module.exports = function (grunt) {
       prod: PROD_CONFIG.CONCAT_IN_ORDER
     },
 
-    uglify: {
-      prod: PROD_CONFIG.UGLIFY
-    },
 
     less: {
       dev: DEV_CONFIG.LESS,
@@ -175,7 +164,7 @@ module.exports = function (grunt) {
                 case 'dev':
                   return ['concat_in_order'];
                 case 'prod':
-                  return ['concat_in_order', 'uglify'];
+                  return ['concat_in_order'];
               }
             })())
       }
@@ -185,7 +174,6 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-replace');
   grunt.loadNpmTasks('grunt-concat-in-order');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 

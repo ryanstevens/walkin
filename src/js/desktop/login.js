@@ -31,7 +31,7 @@ $(function (argument) {
               console.log(user);
               window.location.href = '/walkup';
             });
-          }
+          }else {console.error("WUT", result);}
         });
       });
     } else {
