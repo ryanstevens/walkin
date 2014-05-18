@@ -2,6 +2,17 @@
 
 {% block body %}
   <div class="container">
-    <p>Home page.</p>
+    <p>Walk Up allows you to broadcast your personal walk up song to a room of your choice!</p>
   </div>
+{% endblock %}
+
+{% block js_body_page %}
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io.connect('http://localhost:3000');
+    socket.on('news', function (data) {
+      console.log(data);
+      socket.emit('my other event', { my: 'data' });
+    });
+  </script>
 {% endblock %}

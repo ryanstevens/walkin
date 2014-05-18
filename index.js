@@ -1,11 +1,15 @@
 // buildstrap demo server.
-var consolidate = require('consolidate'),
+var http = require('http'),
+    consolidate = require('consolidate'),
     express = require('express'),
     cookieParser = require('cookie-parser'),
     swig = require('swig'),
     api = require('./lib/api'),
+    port = Number(process.env.PORT || 3000),
     app = express(),
-    port = Number(process.env.PORT || 3000);
+    server = http.createServer(app);
+
+    io = require('socket.io').listen(server);
 
 app.locals({
   templateMap: {
@@ -41,6 +45,13 @@ app.get('/:route?', function (req, res) {
   require('./controllers/static').call(app, req, res);
 });
 
-app.listen(port);
+server.listen(port);
 
 console.log('Running walkup server on port ' + port);
+
+io.sockets.on('connection', function (socket) {
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+});
