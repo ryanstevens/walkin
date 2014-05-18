@@ -9,7 +9,7 @@
       <input id="song-name" type="text" placeholder="Rick Astley - Never Gonna Give You Up" value="{{ song.title }}">
 
       <label for="start-time">Start Time (in Seconds)</label>
-      <input id="start-time" type="text" placeholder="32" value="{{ song.starttime }}">
+      <input id="start-time" type="text" placeholder="32" value="{{ song.starttime|default(0) }}">
 
       <label for="room">Room</label>
       <select id="room"></select>
