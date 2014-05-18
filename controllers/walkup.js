@@ -15,23 +15,29 @@ module.exports = function (req, res) {
     rooms : []
   };
 
-  me(req).done(function (user) {
-    viewParams.user = user;
-
-    Song.allByUser(user).done(function (songs) {
-      if (songs.length) {
-        var song = _.last(songs);
-        viewParams.song = {
-          id : song.id,
-          title : song.get('name'),
-          starttime: song.get('starttime')
-        };
-      }
-
-      res.render('desktop/walkup.html', viewParams);
-
-    });
-  }).fail(function() {
+  function fail() {
     res.redirect(301, '/signup');
-  }); 
+  }
+
+  try {
+
+    me(req).done(function (user) {
+      viewParams.user = user;
+
+      Song.allByUser(user).done(function (songs) {
+        if (songs.length) {
+          var song = _.last(songs);
+          viewParams.song = {
+            id : song.id,
+            title : song.get('name'),
+            starttime: song.get('starttime')
+          };
+        }
+
+        res.render('desktop/walkup.html', viewParams);
+
+      });
+    }).fail(fail);
+  }
+  catch(e) {fail()}
 };
