@@ -59,16 +59,29 @@
     bam.on('canplay', function() {
       console.log('CAN PLAY')
     });
+    // bam.on("timeupdate", handleTimeUpdate);
 
-    function playTrack(trackId, startTime) {
+    function playTrack(trackId, startTime, duration) {
+      var timeout = 1000;
+      duration = duration || 10000; // play for 10 seconds
+
       startTime = parseInt(startTime, 10);
       // bam.autoplay = false;
       bam.identifier = trackId;
       bam.currentTime = startTime;
-      bam.load(trackId, true);
-      bam.play();
-      // console.log('Seek: ', bam.seekable)
 
+      setTimeout(function() {
+        bam.currentTime = startTime;
+        bam.play();
+      }, timeout);
+
+      setTimeout(function() {
+        bam.pause();
+      }, duration + timeout);
+
+      bam.load(trackId, false);
+      // bam.load(trackId);
+      // bam.play();
       // bam.pause();
       // bam.stop();
       // bam.volume = volume.value;
@@ -88,6 +101,21 @@
         playTrack(qs.track, qs.start || 0);
       }
     };
+
+    function handleTimeUpdate() {
+      var elapsed = bam.currentTime;
+      var buffered = bam.buffered;
+      var seekable = bam.seekable;
+      var remaining = bam.duration - elapsed;
+      console.log("Elapsed: " + elapsed);
+      console.log("Remaining: " + remaining);
+      console.log("Start: " + buffered.start);
+      console.log("End: " + buffered.end);
+      console.log("Length: " + buffered.length);
+      console.log("Start: " + seekable.start);
+      console.log("End: " + seekable.end);
+      console.log("Length: " + seekable.length);
+    }
 
     function handleError(value) {
       console.log("Error: " + value);

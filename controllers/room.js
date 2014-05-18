@@ -19,7 +19,6 @@ module.exports = function (req, res, template, viewData) {
     viewData.room = room;
     viewData.app = {
       clientId: process.env.BEATS_CLIENTID,
-      // secret: process.env.BEATS_SECRET,
       accessToken: req.user.accessToken
     }
     viewData.profile = req.user.profile;

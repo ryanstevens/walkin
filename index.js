@@ -82,13 +82,13 @@ app.get('/user', function(req, res) {
 })
 
 app.get('/login', passport.authenticate('beatsmusic'));
-// app.get('/auth/beatsmusic', passport.authenticate('beatsmusic'));
 
 app.get('/auth/beatsmusic/callback', passport.authenticate('beatsmusic', {
   failureRedirect: '/login/failed'
 }), function(req, res) {
   console.log('ON CALLBACK')
   // Successful authentication, redirect home.
+  // Ideally we want to be able to redirect user to the page where he came from
   res.redirect('/');
 });
 
