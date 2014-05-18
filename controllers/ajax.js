@@ -52,6 +52,7 @@ module.exports = function (req, res) {
 
   var dfd = Deferred();
   try {  
+    req.session = null;
     actions[action](req, res, dfd).done(function(result) {
       console.log("Action complete::"+ action, result);
       res.json({
