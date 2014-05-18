@@ -9,7 +9,17 @@
 
 {% block js_body_page %}
   <script src="/socket.io/socket.io.js"></script>
+  <script src="http://bam.cdn.beatsmusic.com/bam-1.0.2.min.js"></script>
   <script>
+    function parseQS() {
+      return window.location.search.replace('?', '').split('&').reduce(function(memo, part) {
+        var parts = (part + '').split('=');
+        if (parts.length) {
+          memo[parts[0]] = parts[1];
+        }
+        return memo;
+      }, {});
+    }
 
     var socket = io.connect('/');
     walkup.connected = $.Deferred();
@@ -17,6 +27,8 @@
     walkup.connected.done(function() {
       socket.on('play', function(play) {
         if (walkup.room.objectId === play.roomId)
+          // play.song.title
+          // playTrack(play.song.trackId, play.song.startTime || 0);
           console.log("PLAY TRACK", play);
         else 
           console.log("Ignoring track to play",play)
@@ -28,6 +40,70 @@
     });
 
     walkup.room = {{ room|json|safe }};
-  </script>
 
+    var bam = new BeatsAudioManager(),
+        qs = parseQS();
+
+    bam.on("ready", handleReady);
+    bam.on("error", handleError);
+    bam.on('canplay', function() {
+      console.log('CAN PLAY')
+    });
+
+    function playTrack(trackId, startTime) {
+      startTime = parseInt(startTime, 10);
+      // bam.autoplay = false;
+      bam.identifier = trackId;
+      bam.currentTime = startTime;
+      bam.load(trackId, true);
+      bam.play();
+      // console.log('Seek: ', bam.seekable)
+
+      // bam.pause();
+      // bam.stop();
+      // bam.volume = volume.value;
+      // bam.volume += 0.1;
+      // bam.muted = false;
+      // bam.loop = false;
+    }
+
+    function handleReady(value) { 
+      bam.clientId = '{{ app.clientId }}';
+      bam.authentication = {
+        access_token: '{{ app.accessToken }}',
+        user_id: '{{ profile.id }}'
+      };
+
+      if (qs.track) {
+        playTrack(qs.track, qs.start || 0);
+      }
+    };
+
+    function handleError(value) {
+      console.log("Error: " + value);
+      switch(value){
+        case "auth":
+        // Beats Music API auth error (401)
+        break;
+        case "connectionfailure":
+        // audio stream connection failure
+        break;
+        case "apisecurity":
+        // Beats Music API crossdomain error
+        break;
+        case "streamsecurity":
+        // audio stream crossdomain error
+        break;
+        case "streamio":
+        // audio stream io error
+        break;
+        case "apiio":
+        // Beats Music API io error getting track data
+        break;
+        case "flashversion":
+        // flash version too low or not installed
+        break;
+      }
+    };
+  </script>
 {% endblock %}
