@@ -1,8 +1,67 @@
 @import '/third-party/bootstrap/bootstrap';
 @import '/third-party/bootstrap/responsive';
 
-@media (min-width: 980px) {
-  body {
-    padding-top: 60px; /* Account for top nav bar. */
-  }
+@WALKUP_BLUE: #0C9FEB;
+@WALKUP_BLUE_HOVER: #008FDA;
+@WALKUP_YELLOW: #E4FE56;
+@WALKUP_YELLOW_HOVER: #D8F833;
+@WALKUP_GREEN: #7DE452;
+@WALKUP_GREEN_HOVER: #65DE33;
+@WALKUP_GREEN_DARK: #2DB41E;
+@WALKUP_PINK: #EE27AA;
+@WALKUP_PINK_HOVER: darken(@WALKUP_PINK, 10%);
+@WALKUP_RED: #FF4545;
+
+body {
+  background: @WALKUP_YELLOW;
+}
+
+.hero-btn {
+  display: block;
+  max-width: 300px;
+  height: 75px;
+  margin: 0 auto 20px;
+  border-bottom: 4px solid;
+  border-bottom-color: darken(@WALKUP_BLUE, 10%);
+  line-height: 75px;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+  background: @WALKUP_BLUE;
+  -webkit-transition: 100ms;
+          transition: 100ms;
+}
+
+.hero-btn:hover,
+.hero-btn:focus {
+  border-bottom-color: darken(@WALKUP_BLUE_HOVER, 10%);
+  text-decoration: none;
+  color: white;
+  background: @WALKUP_BLUE_HOVER;
+}
+
+.hero-btn.callout {
+  border-bottom-color: darken(@WALKUP_PINK, 10%);
+  background: @WALKUP_PINK;
+}
+
+.hero-btn.callout:hover,
+.hero-btn.callout:focus {
+  border-bottom-color: darken(@WALKUP_PINK_HOVER, 10%);
+  background: @WALKUP_PINK_HOVER;
+}
+
+.or {
+  margin-bottom: 20px;
+  font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.home-container {
+  margin-top: 50px;
 }

@@ -9,6 +9,8 @@
 
 {% block head %}{% endblock %}
 
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700">
+
 {% block css_head_base %}
   <link rel="stylesheet" href="/css/desktop/base.css">
 {% endblock %}
@@ -23,17 +25,19 @@
 </head>
 
 <body>
-<div class="navbar navbar-fixed-top">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class="brand" href="/">Walk Up</a>
-      <ul class="nav">
-        <li><a href="/walkup">My Song</a></li>
-        <li><a href="/rooms">Rooms</a></li>
-      </ul>
+{% block navbar %}
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="/">Walk Up</a>
+        <ul class="nav">
+          <li><a href="/walkup">My Song</a></li>
+          <li><a href="/rooms">Rooms</a></li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+{% endblock %}
 
 {% block body %}{% endblock %}
 

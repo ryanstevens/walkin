@@ -65,7 +65,7 @@ app.use('/css', express.static(__dirname + '/build/css'));
 app.use('/js', express.static(__dirname + '/build/js'));
 app.use('/img', express.static(__dirname + '/src/img'));
 app.use('/fonts', express.static(__dirname + '/src/fonts'));
-app.use(express.favicon(__dirname + '/src/img/favicon.png'));
+app.use(express.favicon(__dirname + '/src/img/favicon.v2.png'));
 
 app.use(express.session({ secret: 'secret' }));
 app.use(passport.initialize());
