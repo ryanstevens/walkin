@@ -14,16 +14,25 @@
 {% block js_body_page %}
   <script>
 
+  function sluger(Text) {
+    return Text
+        .toLowerCase()
+        .replace(/ /g,'-')
+        .replace(/[^\w-]+/g,'');
+  }
+
   $(function() {
     var $roomInput = $('#room-name'),
       room = {};
 
     $('.create').click(function() {
+      var name= $roomInput.val();
       $.ajax({
         url : '/ajax/saveRoom',
         data : {
           obj : JSON.stringify(_.extend(room, {
-            name : $roomInput.val()
+            name : name,
+            slug : sluger(name)
           }))
         }
       }).done(function(result) {

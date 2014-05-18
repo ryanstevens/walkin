@@ -41,11 +41,12 @@ test('Parse', function(t) {
                 t.ok(songs.length>0);
 
                 room.save({
-                  name : "beep"
+                  name : "beep",
+                  slug : "foop"
                 }).done(function(roomModel) {
 
-                  room.all().done(function(rooms) {
-                    t.ok(rooms.length>0);
+                  room.getBySlug(roomModel.get('slug')).done(function(room) {
+                    t.ok(room.get('name') === 'beep');
                     t.end();
                   });
 

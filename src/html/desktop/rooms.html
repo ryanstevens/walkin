@@ -5,9 +5,7 @@
     <p><a href="/create">Create a Room</a></p>
     <hr>
     <h1>Become a Room</h1>
-    <ul>
-      <li><a href="/room/Some-Room">Some Room</a></li>
-      <li><a href="/room/Some-Other-Room">Some Other Room</a></li>
+    <ul id="rooms-list">
     </ul>
   </div>
 {% endblock %}
@@ -15,13 +13,18 @@
 
 {% block js_body_page %}
   <script>
-  var rooms = null;
+  var rooms = null,
+    $rooms = $('#rooms-list');
 
   $.ajax({
     url : '/ajax/getAllRooms'
   }).done(function(result) {
     if (result.value) {
       rooms = result.value;
+      rooms.forEach(function(room) {
+        console.log(room)
+        $rooms.append($('<li><a href="/room/'+room.slug+'">'+room.name+'</a></li>'))
+      });
     }
     console.log("Rooms::", result);
   });
