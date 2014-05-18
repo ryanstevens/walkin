@@ -39,7 +39,7 @@
             if (track && track.id) {
               var title = track.display;
               $('.status').html("Playing <b>" + title+'</b><br>');
-              playTrack(track.id, play.song.startTime || 0);
+              playTrack(track.id, play.song.starttime || 0);
             } else {
               console.log('SMTH wrong with track: ', res)
             }
