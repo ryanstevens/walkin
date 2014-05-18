@@ -38,7 +38,7 @@ var actions = {
   saveRoom :function(req, res, dfd) {
     var roomJSON = JSON.parse(req.query.obj);
     console.log("Saving Room::", roomJSON);
-    return Room.save(roomJSON, user);
+    return Room.save(roomJSON);
   },
   getAllRooms : function() {
     return Room.all();
