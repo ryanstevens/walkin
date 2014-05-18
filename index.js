@@ -27,7 +27,7 @@ app.set('view engine', 'html');
 app.set('views', __dirname + '/build/html');
 swig.setDefaults({ cache: false });
 
-app.get('/ajax', function (req, res) {
+app.get('/ajax/:action', function (req, res) {
   require('./controllers/ajax').call(app, req, res);
 });
 

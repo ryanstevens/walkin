@@ -15,10 +15,10 @@ test('Parse', function(t) {
     ,updated_time: "2014-02-07T18:41:55+0000"
     , verified: true}).done(function(userModel) {
 
-      user.makeSession(userModel).done(function(session) {
+      user.makeSession(userModel.id).done(function(session) {
 
-        user.getUserFromSession(session.id).done(function() {
-          console.log("Session", session.id);
+        user.getUserFromSession(session.id).done(function(user) {
+          console.log("User", user.id);
         });
       })
 

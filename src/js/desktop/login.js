@@ -4,7 +4,18 @@ $(function (argument) {
     if (response && response.status == 'connected') {
       FB.api('me', function (user) {
         user.authData = response.authResponse;
-        console.log('Got /me data:', user);
+        var id = user.id;
+        user.fb_user_id = user.id;
+        delete user.id;
+
+        $.ajax({
+          url : '/ajax/register',
+          data : {
+            obj: JSON.stringify(user)
+          }
+        }).done(function(result) {
+          console.log('Got data:', result);
+        });
       });
     } else {
       FB.login(tryLogin, {
