@@ -1,5 +1,6 @@
 var test = require('tap').test;
 var user = require('../lib/user');
+var song = require('../lib/song');
 
 test('Parse', function(t) {
 
@@ -20,7 +21,12 @@ test('Parse', function(t) {
         user.getUserFromSession(session.id).done(function(user) {
           t.equal("10152017615725566", user.get('fb_user_id'));
 
-          t.end();
+          song.save({
+            name : 'foobar'
+          }).done(function(song) {
+            t.ok('foobar', song.get('name'));
+            t.end();
+          });
 
         });
       })

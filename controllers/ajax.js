@@ -18,7 +18,7 @@ var actions = {
     return dfd.promise();
   },
   me : function(req) {
-    if (!req.cookies.wid) return throw Error('notauthed');
+    if (!req.cookies.wid) throw Error('notauthed');
     console.log("Checking for session::" + req.cookies.wid)
     return User.getUserFromSession(req.cookies.wid);
   },
