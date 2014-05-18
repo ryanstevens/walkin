@@ -39,7 +39,8 @@
         if (result.value) {
           room = result.value;
         }
-        console.log("Rooms::", result);
+        console.log("Room::", room);
+        window.location.href = '/room/'+room.slug;
       });
 
     });
