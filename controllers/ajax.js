@@ -1,6 +1,7 @@
 var Deferred = require('Deferred'),
   User = require('../lib/user'),
-  Song = require('../lib/song');
+  Song = require('../lib/song'),
+  Room = require('../lib/room');
 
 
 var actions = {
@@ -25,7 +26,7 @@ var actions = {
   saveSong : function(req, res, dfd) {
     return this.me(req).pipe(function(user) {
       var songJSON = JSON.parse(req.query.obj);
-      console.log("Saving::", songJSON);
+      console.log("Saving Song::", songJSON);
       return Song.save(songJSON, user);
     });
   },
@@ -33,6 +34,14 @@ var actions = {
     return this.me(req).pipe(function(user) {
       return Song.allByUser(user);
     });
+  },
+  saveRoom :function(req, res, dfd) {
+    var roomJSON = JSON.parse(req.query.obj);
+    console.log("Saving Room::", roomJSON);
+    return Room.save(roomJSON, user);
+  },
+  getAllRooms : function() {
+    return Room.all();
   }
 };
 

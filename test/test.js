@@ -1,6 +1,7 @@
 var test = require('tap').test;
 var user = require('../lib/user');
 var song = require('../lib/song');
+var room = require('../lib/room');
 
 test('Parse', function(t) {
 
@@ -38,7 +39,17 @@ test('Parse', function(t) {
               song.allByUser(user).done(function(songs) {
                 console.dir(songs);
                 t.ok(songs.length>0);
-                t.end();
+
+                room.save({
+                  name : "beep"
+                }).done(function(roomModel) {
+
+                  room.all().done(function(rooms) {
+                    t.ok(rooms.length>0);
+                    t.end();
+                  });
+
+                });
               });
             });
           });
