@@ -8,6 +8,7 @@
   </div>
 {% endblock %}
 
+{% block title %}Room - Walk Up{% endblock %}
 
 {% block js_body_page %}
   <script src="/socket.io/socket.io.js"></script>
@@ -100,7 +101,7 @@
       // bam.loop = false;
     }
 
-    function handleReady(value) { 
+    function handleReady(value) {
       bam.clientId = '{{ app.clientId }}';
       bam.authentication = {
         access_token: '{{ app.accessToken }}',
