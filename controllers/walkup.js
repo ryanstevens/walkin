@@ -39,5 +39,8 @@ module.exports = function (req, res) {
       });
     }).fail(fail);
   }
-  catch(e) {fail()}
+  catch(e) {
+    console.log("Issue rendering walkon", e);
+    fail();
+  }
 };
