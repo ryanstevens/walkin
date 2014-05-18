@@ -1,41 +1,72 @@
 $(function () {
 
-var song = null;
+  var socket = io.connect('/');
+  walkup.connected = $.Deferred();
 
-$.ajax({
-  url : '/ajax/getSongs'
-}).done(function(result) {
-  if (result.value) {
-    song = result.value[0];
+  function checkState () {
+    $submit.prop('disabled', (
+      $songName.val().length === 0 || 
+      $startTime.val().length === 0 || 
+      isSaving === true || 
+      walkup.connected.state() != 'resolved'
+    ));
   }
-  console.log(result);
-});
 
-function handleKeyPress () {
-  $submit.prop('disabled', !$songName.val());
-}
+  var $songName = $('#song-name'),
+      $startTime = $('#start-time'),
+      $room = $('#room'),
+      $submit = $('#submit'),
+      isSaving = false;
 
-var $songName = $('#song-name'),
-    $startTime = $('#start-time'),
-    $room = $('#room'),
-    $submit = $('#submit');
+  $('input').on('keyup change', checkState);
 
-$songName.on('keyup change', handleKeyPress);
+  $submit.click(function() {
 
-/*$('#submit').click(function() {
+    walkup.song.title = $songName.val();
+    walkup.song.starttime = $startTime.val();
 
-  var songToUpdate = {
-    "name" : "josh's song"
-  };
+    isSaving = true;
+    checkState();
+    $.ajax({
+      url : '/ajax/saveSong',
+      data : {
+        obj : JSON.stringify(walkup.song)
+      }
+    }).always(function() {
+      isSaving = false;
+      checkState();
+    })
 
-  if (song) songToUpdate.id = song.objectId;
+    walkup.connected.done(function() {
+      socket.emit('enterRoom', walkup.song);
+    });
+  });
+
 
   $.ajax({
-    url : '/ajax/saveSong',
-    data : {
-      obj : JSON.stringify(songToUpdate)
+    url : '/ajax/getAllRooms'
+  }).done(function(result) {
+    if (result.value) {
+      var rooms = result.value;
+      rooms.forEach(function(room) {
+        $room.append(
+            $('<option></option>').val(room.id).html(room.name)
+        );
+      });
     }
-  })
-});*/
+    console.log("Rooms::", result);
+  });
 
+
+  socket.on('connect', function (data) {
+    if (data && data.state === 'ready') walkup.connected.resolve(data.state);
+  });
+
+  walkup.connected.done(function(state) {
+    console.log("Connected", state);
+    checkState();
+  });
+
+
+  checkState();
 });

@@ -10,9 +10,7 @@
       <input id="start-time" type="text" placeholder="32" value="{{ song.starttime }}">
 
       <label for="room">Room</label>
-      <select id="room">
-        <option>Some Room</option>
-        <option>Some Other Room</option>
+      <select id="room"></select>
       </select>
 
       <label for="submit">Walk Up!</label>
@@ -23,9 +21,14 @@
 
 
 {% block js_body_page %}
+
+  <script src="/socket.io/socket.io.js"></script>
   <script>
     walkup.user = {{ user|json|safe }};
+    walkup.song = {{ song|json|safe }};
+    walkup.rooms = {{ rooms|json|safe }};
   </script>
   <script src="/js/desktop/walkup.js"></script>
+
 {% endblock %}
 

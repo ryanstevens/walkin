@@ -8,24 +8,30 @@ function me (req) {
   return User.getUserFromSession(req.cookies.wid);
 }
 
-function getSongs (req) {
-  return me(req).pipe(function(user) {
-    return Song.allByUser(user);
-  });
-}
-
 module.exports = function (req, res) {
-  var viewParams = {};
+  var viewParams = {
+    user : {},
+    song : {},
+    rooms : []
+  };
 
   me(req).done(function (user) {
     viewParams.user = user;
 
-    getSongs(req).done(function (songs) {
+    Song.allByUser(user).done(function (songs) {
       if (songs.length) {
-        viewParams.song = _.last(songs);
+        var song = _.last(songs);
+        viewParams.song = {
+          id : song.id,
+          title : song.get('name'),
+          starttime: song.get('starttime')
+        };
       }
 
       res.render('desktop/walkup.html', viewParams);
+
     });
-  });
+  }).fail(function() {
+    res.redirect(301, '/signup');
+  }); 
 };

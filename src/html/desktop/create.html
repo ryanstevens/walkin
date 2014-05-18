@@ -13,10 +13,10 @@
 
 {% block js_body_page %}
   <script>
-  var room = {};
 
   $(function() {
-    var $roomInput = $('#room-name');
+    var $roomInput = $('#room-name'),
+      room = {};
 
     $('.create').click(function() {
       $.ajax({
