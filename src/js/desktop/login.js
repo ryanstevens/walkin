@@ -1,8 +1,15 @@
-$.ajax({url : '/ajax/me'}).done(function(user) {
-  console.log(user);
-});
+
+function getMe() {
+  return $.ajax({url : '/ajax/me'}).pipe(function(result) {
+    return result.value;
+  });
+}
 
 $(function (argument) {
+
+  getMe().done(function(user) {
+    console.log(user);
+  });
 
   function tryLogin (response) {
     if (response && response.status == 'connected') {
@@ -18,7 +25,12 @@ $(function (argument) {
             obj: JSON.stringify(user)
           }
         }).done(function(result) {
-          console.log('Got data:', result);
+          console.log('Got data:', result.value);
+          if (!result.error) {
+            getMe().done(function(user){
+              console.log(user);
+            });
+          }
         });
       });
     } else {

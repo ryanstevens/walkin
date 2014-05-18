@@ -18,7 +18,10 @@ test('Parse', function(t) {
       user.makeSession(userModel.id).done(function(session) {
 
         user.getUserFromSession(session.id).done(function(user) {
-          console.log("User", user.id);
+          t.equal("10152017615725566", user.get('fb_user_id'));
+
+          t.end();
+
         });
       })
 

@@ -7,6 +7,7 @@
     "Deferred": "^0.1.1",
     "consolidate": "0.9.1",
     "cookie-parser": "^1.1.0",
+    "cookieparser": "^0.1.0",
     "express": "3.4.0",
     "facebook-node-sdk": "^0.2.0",
     "grunt": "~0.4.1",
@@ -22,7 +23,7 @@
     "node-uuid": "^1.4.1",
     "swig": "1.0.0-rc3",
     "tap": "0.4.9",
-    "underscore": "1.5.2",
+    "underscore": "^1.5.2",
     "xmlhttprequest": "^1.6.0"
   },
   "engine": "node 0.10.26",

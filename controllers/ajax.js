@@ -1,5 +1,6 @@
 var Deferred = require('Deferred'),
-  User = require('../lib/user');
+  User = require('../lib/user'),
+  Song = require('../lib/song');
 
 
 var actions = {
@@ -16,10 +17,18 @@ var actions = {
 
     return dfd.promise();
   },
-  me : function(req, res, dfd) {
-    if (!req.cookies.wid) return dfd.resolve({ error : 'goaway'});
+  me : function(req) {
+    if (!req.cookies.wid) return throw Error('notauthed');
     console.log("Checking for session::" + req.cookies.wid)
     return User.getUserFromSession(req.cookies.wid);
+  },
+  saveSong : function(req, res, dfd) {
+    return Song.save(JSON.parse(req.query.obj));
+  },
+  getSongs : function() {
+    return this.me(req).pipe(function(user) {
+      return user;
+    });
   }
 };
 
@@ -29,8 +38,25 @@ module.exports = function (req, res) {
     action = req.params.action;
 
   var dfd = Deferred();
-  actions[action](req, res, dfd).done(function(result) {
-    res.json(result);
-    res.end();
-  });
+  try {  
+    actions[action](req, res, dfd).done(function(result) {
+      res.json({
+        result : 'ok',
+        value : result
+      });
+      res.end();
+    }).fail(function(error) {
+      res.json({
+        result : 'error',
+        error : error
+      });
+      res.end();
+    });
+  }
+  catch(e) {
+    res.json({
+      result : 'error',
+      error : e.message
+    });
+  }
 };
