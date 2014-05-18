@@ -87,6 +87,10 @@ app.get('/test/:video', function (req, res) {
   require('./controllers/test').call(app, req, res);
 });
 
+app.get('/walkup', function (req, res) {
+  require('./controllers/walkup').call(app, req, res);
+});
+
 app.get('/:route?', function (req, res) {
   require('./controllers/static').call(app, req, res);
 });

@@ -4,10 +4,10 @@
   <div class="container">
     <fieldset>
       <label for="song-name">Artist - Song Name</label>
-      <input id="song-name" type="text" placeholder="Rick Astley - Never Gonna Give You Up">
+      <input id="song-name" type="text" placeholder="Rick Astley - Never Gonna Give You Up" value="{{ song.title }}">
 
       <label for="start-time">Start Time (in Seconds)</label>
-      <input id="start-time" type="text" placeholder="32">
+      <input id="start-time" type="text" placeholder="32" value="{{ song.starttime }}">
 
       <label for="room">Room</label>
       <select id="room">
@@ -16,7 +16,7 @@
       </select>
 
       <label for="submit">Walk Up!</label>
-      <button id="submit" class="btn btn-primary walkup">Walk Up</button>
+      <button id="submit" class="btn btn-primary walkup" disabled>Walk Up</button>
     </fieldset>
   </div>
 {% endblock %}
@@ -24,32 +24,8 @@
 
 {% block js_body_page %}
   <script>
-  var song = null;
-
-  $.ajax({
-    url : '/ajax/getSongs'
-  }).done(function(result) {
-    if (result.value) {
-      song = result.value[0];
-    }
-    console.log(result);
-  });
-
-  $('#submit').click(function() {
-
-    var songToUpdate = {
-      "name" : "josh's song"
-    };
-
-    if (song) songToUpdate.id = song.objectId;
-
-    $.ajax({
-      url : '/ajax/saveSong',
-      data : {
-        obj : JSON.stringify(songToUpdate)
-      }
-    })
-  });
+    walkup.user = {{ user|json|safe }};
   </script>
+  <script src="/js/desktop/walkup.js"></script>
 {% endblock %}
 
