@@ -10,7 +10,7 @@ var actions = {
 
     var user = JSON.parse(req.query.obj);
     User.createUser(user).done(function(user) {
-      console.log("Created user " + user.id, user);
+      console.log("User::" + user.id, user);
       User.makeSession(user.id).done(function(session) {
         res.cookie('wid', session.id);
         dfd.resolve(session.id)
@@ -65,6 +65,7 @@ module.exports = function (req, res) {
       });
       res.end();
     }).fail(function(error) {
+      console.log("ERROR: " + action, error);
       res.json({
         result : 'error',
         error : error
@@ -73,6 +74,7 @@ module.exports = function (req, res) {
     });
   }
   catch(e) {
+    console.log("ERROR CAUGHT::" + action, e);
     res.json({
       result : 'error',
       error : e.message
