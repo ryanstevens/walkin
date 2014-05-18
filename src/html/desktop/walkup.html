@@ -3,17 +3,17 @@
 {% block body %}
   <div class="container">
     <fieldset>
-      <label>Artist - Song Name</label>
-      <input type="text" placeholder="Rick Astley - Never Gonna Give You Up">
+      <label for="song-name">Artist - Song Name</label>
+      <input id="song-name" type="text" placeholder="Rick Astley - Never Gonna Give You Up">
 
-      <label>Room</label>
-      <select>
+      <label for="room">Room</label>
+      <select id="room">
         <option>Some Room</option>
         <option>Some Other Room</option>
       </select>
 
-      <label>Walk Up!</label>
-      <button class="btn btn-primary walkup">Walk Up</button>
+      <label for="submit">Walk Up!</label>
+      <button id="submit" disabled class="btn btn-primary walkup">Walk Up</button>
     </fieldset>
   </div>
 {% endblock %}
