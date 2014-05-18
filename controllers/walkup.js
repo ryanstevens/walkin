@@ -29,7 +29,7 @@ module.exports = function (req, res) {
           var song = _.last(songs);
           viewParams.song = {
             id : song.id,
-            title : song.get('name'),
+            title : song.get('title'),
             starttime: song.get('starttime')
           };
         }
