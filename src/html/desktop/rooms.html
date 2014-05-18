@@ -15,31 +15,16 @@
 
 {% block js_body_page %}
   <script>
-  var song = null;
+  var rooms = null;
 
   $.ajax({
-    url : '/ajax/getSongs'
+    url : '/ajax/getAllRooms'
   }).done(function(result) {
     if (result.value) {
-      song = result.value[0];
+      rooms = result.value;
     }
-    console.log(result);
+    console.log("Rooms::", result);
   });
 
-  $('#submit').click(function() {
-
-    var songToUpdate = {
-      "name" : "josh's song"
-    };
-
-    if (song) songToUpdate.id = song.objectId;
-
-    $.ajax({
-      url : '/ajax/saveSong',
-      data : {
-        obj : JSON.stringify(songToUpdate)
-      }
-    });
-  });
   </script>
 {% endblock %}
