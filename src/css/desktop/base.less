@@ -30,7 +30,11 @@ body {
   text-transform: uppercase;
   text-align: center;
   color: white;
-  background: @WALKUP_BLUE;
+  background-color: @WALKUP_BLUE;
+  background-image: url(/img/icon_synth.png);
+  background-position: -20px -90px;
+  background-size: 320px 240px;
+  background-repeat: no-repeat;
   cursor: pointer;
   -webkit-transition: 100ms;
           transition: 100ms;
@@ -41,18 +45,21 @@ body {
   border-bottom-color: darken(@WALKUP_BLUE_HOVER, 10%);
   text-decoration: none;
   color: white;
-  background: @WALKUP_BLUE_HOVER;
+  background-color: @WALKUP_BLUE_HOVER;
 }
 
 .hero-btn.callout {
   border-bottom-color: darken(@WALKUP_PINK, 10%);
-  background: @WALKUP_PINK;
+  background-color: @WALKUP_PINK;
+  background-image: url(/img/icon_tape.png);
+  background-position: 20px -20px;
+  background-size: 145px 114px;
 }
 
 .hero-btn.callout:hover,
 .hero-btn.callout:focus {
   border-bottom-color: darken(@WALKUP_PINK_HOVER, 10%);
-  background: @WALKUP_PINK_HOVER;
+  background-color: @WALKUP_PINK_HOVER;
 }
 
 .or {
