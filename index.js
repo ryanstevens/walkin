@@ -4,12 +4,37 @@ var http = require('http'),
     express = require('express'),
     cookieParser = require('cookie-parser'),
     swig = require('swig'),
+    passport = require('passport'),
+    BeatsMusicStrategy = require('passport-beatsmusic').Strategy,
     api = require('./lib/api'),
+    beats = require('./lib/beats'),
+    host = process.env.HOST || '127.0.0.1',
     port = Number(process.env.PORT || 3000),
+    beatsClientId = process.env.BEATS_CLIENTID,
+    beatsSecret = process.env.BEATS_SECRET,
     app = express(),
-    server = http.createServer(app);
-
+    server = http.createServer(app),
     io = require('socket.io').listen(server);
+
+passport.use(new BeatsMusicStrategy({
+  clientID: beatsClientId,
+  clientSecret: beatsSecret,
+  callbackURL: 'http://' + host + (port > 80 ? ':' + port : '') + '/auth/beatsmusic/callback'
+}, function(accessToken, refreshToken, profile, done) {
+  done(null, {
+    accessToken: accessToken,
+    refreshToken: refreshToken,
+    profile: profile
+  })
+}));
+
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 app.locals({
   templateMap: {
@@ -28,10 +53,31 @@ app.use('/img', express.static(__dirname + '/src/img'));
 app.use('/fonts', express.static(__dirname + '/src/fonts'));
 app.use(express.favicon(__dirname + '/src/img/favicon.png'));
 
+app.use(express.cookieParser());
+app.use(express.session({ secret: 'secret' }));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.engine('html', consolidate.swig);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/build/html');
 swig.setDefaults({ cache: false });
+
+app.get('/user', function(req, res) {
+  console.log(':: user ::', req.user)
+  res.end(JSON.stringify(req.user));
+})
+
+app.get('/login', passport.authenticate('beatsmusic'));
+// app.get('/auth/beatsmusic', passport.authenticate('beatsmusic'));
+
+app.get('/auth/beatsmusic/callback', passport.authenticate('beatsmusic', {
+  failureRedirect: '/login/failed'
+}), function(req, res) {
+  console.log('ON CALLBACK')
+  // Successful authentication, redirect home.
+  res.redirect('/');
+});
 
 app.get('/ajax/:action', function (req, res) {
   require('./controllers/ajax').call(app, req, res);
