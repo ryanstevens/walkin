@@ -38,7 +38,7 @@
             var track = res.value;
             if (track && track.id) {
               var title = track.display;
-              $('.status').text("Playing <b>" + title+'</b>');
+              $('.status').html("Playing <b>" + title+'</b><br>');
               playTrack(track.id, play.song.startTime || 0);
             } else {
               console.log('SMTH wrong with track: ', res)
@@ -91,6 +91,7 @@
 
       setTimeout(function() {
         bam.pause();
+        $('.status').html("Waiting");
       }, duration + timeout);
 
       bam.load(trackId, false);
