@@ -11,7 +11,8 @@ app.locals({
     'home': 'desktop/home.html',
     'signup': 'desktop/signup.html',
     'walkup': 'desktop/walkup.html',
-    'rooms': 'desktop/rooms.html'
+    'rooms': 'desktop/rooms.html',
+    'create': 'desktop/create.html'
   }
 });
 
