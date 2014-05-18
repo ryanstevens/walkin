@@ -38,7 +38,8 @@
             var track = res.value;
             if (track && track.id) {
               var title = track.display;
-              $('.status').html("Playing <b>" + title+'</b><br>');
+              $('.status').html("Playing <b>" + title+'</b><br><br>'+
+                 '<img src="https://graph.facebook.com/'+play.user.fb_user_id+'/picture?type=normal">');
               playTrack(track.id, play.song.starttime || 0);
             } else {
               console.log('SMTH wrong with track: ', res)
