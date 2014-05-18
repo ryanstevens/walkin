@@ -16,6 +16,19 @@ var http = require('http'),
     server = http.createServer(app),
     io = require('socket.io').listen(server);
 
+// Simple route middleware to ensure user is authenticated.
+//   Use this route middleware on any resource that needs to be protected.  If
+//   the request is authenticated (typically via a persistent login session),
+//   the request will proceed.  Otherwise, the user will be redirected to the
+//   login page.
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+
+  res.redirect('/login');
+}
+
 passport.use(new BeatsMusicStrategy({
   clientID: beatsClientId,
   clientSecret: beatsSecret,
@@ -53,7 +66,6 @@ app.use('/img', express.static(__dirname + '/src/img'));
 app.use('/fonts', express.static(__dirname + '/src/fonts'));
 app.use(express.favicon(__dirname + '/src/img/favicon.png'));
 
-app.use(express.cookieParser());
 app.use(express.session({ secret: 'secret' }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -85,6 +97,10 @@ app.get('/ajax/:action', function (req, res) {
 
 app.get('/test/:video', function (req, res) {
   require('./controllers/test').call(app, req, res);
+});
+
+app.get('/room/:name', ensureAuthenticated, function (req, res) {
+  require('./controllers/room').call(app, req, res);
 });
 
 app.get('/walkup', function (req, res) {
