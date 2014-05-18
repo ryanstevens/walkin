@@ -16,7 +16,10 @@
 
     walkup.connected.done(function() {
       socket.on('play', function(play) {
-        console.log("PLAY TRACK", play);
+        if (walkup.room.objectId === play.roomId)
+          console.log("PLAY TRACK", play);
+        else 
+          console.log("Ignoring track to play",play)
       });
     })
 
@@ -24,5 +27,7 @@
       if (data && data.state === 'ready') walkup.connected.resolve(data.state);
     });
 
-  </script
+    walkup.room = {{ room|json|safe }};
+  </script>
+
 {% endblock %}

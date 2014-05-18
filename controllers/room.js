@@ -1,3 +1,5 @@
+var room = require('../lib/room');
+
 function capitalize (string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -9,5 +11,8 @@ module.exports = function (req, res, template, viewData) {
   template = template || app.locals.templateMap.room;
   viewData = viewData || { title: capitalize(route) };
 
-  res.render(template, viewData);
+  room.getBySlug(req.params.name).done(function(room) {
+    viewData.room = room;
+    res.render(template, viewData);
+  });
 };

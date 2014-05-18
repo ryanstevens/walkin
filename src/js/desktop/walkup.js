@@ -38,7 +38,10 @@ $(function () {
     })
 
     walkup.connected.done(function() {
-      socket.emit('enterRoom', walkup.song);
+      socket.emit('enterRoom', {
+        roomId : $('#room option:selected').val(),
+        song : walkup.song
+      });
     });
   });
 
@@ -50,7 +53,7 @@ $(function () {
       var rooms = result.value;
       rooms.forEach(function(room) {
         $room.append(
-            $('<option></option>').val(room.id).html(room.name)
+            $('<option></option>').val(room.objectId).html(room.name)
         );
       });
     }
