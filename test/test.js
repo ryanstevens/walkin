@@ -22,10 +22,26 @@ test('Parse', function(t) {
           t.equal("10152017615725566", user.get('fb_user_id'));
 
           song.save({
-            name : 'foobar'
-          }).done(function(song) {
-            t.ok('foobar', song.get('name'));
-            t.end();
+            name : 'foobar',
+            person: user,
+            status : 'active'
+          }).done(function(savedSong) {
+            t.ok('foobar', savedSong.get('name'));
+            var id = savedSong.id;
+            console.log("Song created", id);
+
+            song.save({
+              start : 3,
+              id : id
+            }).done(function(updatedSong) {
+              t.equal(id, updatedSong.id);
+
+              song.allByUser(user).done(function(songs) {
+                console.dir(songs);
+                t.ok(songs.length>0);
+                t.end();
+              });
+            });
           });
 
         });

@@ -25,9 +25,9 @@ var actions = {
   saveSong : function(req, res, dfd) {
     return Song.save(JSON.parse(req.query.obj));
   },
-  getSongs : function() {
+  getSongs : function(req) {
     return this.me(req).pipe(function(user) {
-      return user;
+      return Song.allByUser(user);
     });
   }
 };
