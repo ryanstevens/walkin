@@ -37,6 +37,8 @@
           }).done(function(res) {
             var track = res.value;
             if (track && track.id) {
+              var title = track.display;
+              $('.status').text("Playing <b>" + title+'</b>');
               playTrack(track.id, play.song.startTime || 0);
             } else {
               console.log('SMTH wrong with track: ', res)
@@ -80,6 +82,7 @@
       // bam.autoplay = false;
       bam.identifier = trackId;
       bam.currentTime = startTime;
+
 
       setTimeout(function() {
         bam.currentTime = startTime;
