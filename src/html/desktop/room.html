@@ -2,7 +2,9 @@
 
 {% block body %}
   <div class="container">
-    <p><a href="/create">{{ room.title }}</a></p>
+    <p><span class="roomName"></span></p>
+    <br>
+    <div><span class='status'></span></div>
   </div>
 {% endblock %}
 
@@ -11,6 +13,8 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="http://bam.cdn.beatsmusic.com/bam-1.0.2.min.js"></script>
   <script>
+
+
     function parseQS() {
       return window.location.search.replace('?', '').split('&').reduce(function(memo, part) {
         var parts = (part + '').split('=');
@@ -50,6 +54,12 @@
     });
 
     walkup.room = {{ room|json|safe }};
+
+    $(function() {
+      $('.roomName').text(walkup.room.name)
+      $('.status').text('Waiting');
+    });
+
 
     var bam = new BeatsAudioManager(),
         qs = parseQS();
