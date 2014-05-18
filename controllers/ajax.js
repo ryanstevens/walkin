@@ -1,7 +1,8 @@
 var Deferred = require('Deferred'),
-  User = require('../lib/user'),
-  Song = require('../lib/song'),
-  Room = require('../lib/room');
+    User = require('../lib/user'),
+    Song = require('../lib/song'),
+    Room = require('../lib/room'),
+    beats = require('../lib/beats');
 
 
 var actions = {
@@ -42,6 +43,9 @@ var actions = {
   },
   getAllRooms : function() {
     return Room.all();
+  },
+  lookuptrack: function(req, res) {
+    return beats.lookupTrack(req.query.song);
   }
 };
 

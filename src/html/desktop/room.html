@@ -26,12 +26,22 @@
 
     walkup.connected.done(function() {
       socket.on('play', function(play) {
-        if (walkup.room.objectId === play.roomId)
-          // play.song.title
-          // playTrack(play.song.trackId, play.song.startTime || 0);
+        if (walkup.room.objectId === play.roomId) {
+          $.ajax({
+            url: '/ajax/lookuptrack?song=' + play.song.title
+          }).done(function(res) {
+            var track = res.value;
+            if (track && track.id) {
+              playTrack(track.id, play.song.startTime || 0);
+            } else {
+              console.log('SMTH wrong with track: ', res)
+            }
+          })
+
           console.log("PLAY TRACK", play);
-        else 
+        } else {
           console.log("Ignoring track to play",play)
+        }
       });
     })
 
