@@ -29,13 +29,14 @@ $(function (argument) {
           if (!result.error) {
             getMe().done(function(user){
               console.log(user);
+              window.location.href = '/walkup';
             });
           }
         });
       });
     } else {
       FB.login(tryLogin, {
-        scope : 'email', 
+        scope : 'email',
         return_scopes: true
       });
     }
