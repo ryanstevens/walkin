@@ -1,0 +1,28 @@
+{% extends '/base.html' %}
+
+{% block body %}
+  <div class="container">
+    <p><a href="/create">{{ room.title }}</a></p>
+  </div>
+{% endblock %}
+
+
+{% block js_body_page %}
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+
+    var socket = io.connect('/');
+    walkup.connected = $.Deferred();
+
+    walkup.connected.done(function() {
+      socket.on('play', function(play) {
+        console.log("PLAY TRACK", play);
+      });
+    })
+
+    socket.on('connect', function (data) {
+      if (data && data.state === 'ready') walkup.connected.resolve(data.state);
+    });
+
+  </script
+{% endblock %}

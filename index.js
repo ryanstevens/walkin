@@ -54,6 +54,7 @@ app.locals({
     'home': 'desktop/home.html',
     'signup': 'desktop/signup.html',
     'walkup': 'desktop/walkup.html',
+    'room': 'desktop/room.html',
     'rooms': 'desktop/rooms.html',
     'create': 'desktop/create.html'
   }
@@ -119,6 +120,6 @@ io.sockets.on('connection', function (socket) {
   socket.emit('connect', { state: 'ready' });
 
   socket.on('enterRoom', function(val) {
-    console.log("!!!!!!!!!!!!", val)
+    socket.broadcast.emit('play', val);
   })
 });
