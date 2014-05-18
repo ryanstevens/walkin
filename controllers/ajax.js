@@ -12,6 +12,7 @@ var actions = {
     User.createUser(user).done(function(user) {
       console.log("User::" + user.id, user);
       User.makeSession(user.id).done(function(session) {
+        console.log("Dropping cookie", user);
         res.cookie('wid', session.id);
         dfd.resolve(session.id)
       });
