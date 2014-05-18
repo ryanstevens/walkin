@@ -23,7 +23,11 @@ var actions = {
     return User.getUserFromSession(req.cookies.wid);
   },
   saveSong : function(req, res, dfd) {
-    return Song.save(JSON.parse(req.query.obj));
+    return this.me(req).pipe(function(user) {
+      var songJSON = JSON.parse(req.query.obj);
+      console.log("Saving::", songJSON);
+      return Song.save(songJSON, user);
+    });
   },
   getSongs : function(req) {
     return this.me(req).pipe(function(user) {

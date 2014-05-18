@@ -23,9 +23,8 @@ test('Parse', function(t) {
 
           song.save({
             name : 'foobar',
-            person: user,
             status : 'active'
-          }).done(function(savedSong) {
+          }, user).done(function(savedSong) {
             t.ok('foobar', savedSong.get('name'));
             var id = savedSong.id;
             console.log("Song created", id);
@@ -33,7 +32,7 @@ test('Parse', function(t) {
             song.save({
               start : 3,
               id : id
-            }).done(function(updatedSong) {
+            }, user).done(function(updatedSong) {
               t.equal(id, updatedSong.id);
 
               song.allByUser(user).done(function(songs) {

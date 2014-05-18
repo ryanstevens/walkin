@@ -16,7 +16,40 @@
       </select>
 
       <label for="submit">Walk Up!</label>
-      <button id="submit" disabled class="btn btn-primary walkup">Walk Up</button>
+      <button id="submit" class="btn btn-primary walkup">Walk Up</button>
     </fieldset>
   </div>
 {% endblock %}
+
+
+{% block js_body_page %}
+  <script>
+  var song = null;
+
+  $.ajax({
+    url : '/ajax/getSongs'
+  }).done(function(result) {
+    if (result.value) {
+      song = result.value[0];
+    }
+    console.log(result);
+  });
+
+  $('#submit').click(function() {
+
+    var songToUpdate = {
+      "name" : "josh's song"
+    };
+
+    if (song) songToUpdate.id = song.objectId;
+
+    $.ajax({
+      url : '/ajax/saveSong',
+      data : {
+        obj : JSON.stringify(songToUpdate)
+      }
+    })
+  });
+  </script>
+{% endblock %}
+
